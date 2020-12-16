@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Carrinho</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      <ion-thumbnail slot="start">
+        <img [src]="item.produto.imageUrl || 'assets/imgs/prod.jpg'" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ item.produto.nome }}</h2>
+        <p>Valor: {{ item.produto.preco | currency }}</p>
+        <ion-icon
+          class="nolinebreak iconSize"
+          color="primary"
+          name="remove-circle"
+          (click)="decreaseQuantity(item.produto)"
+        ></ion-icon>
+        <p class="nolinebreak iconSize">{{ item.quantidade }}</p>
+        <ion-icon
+          class="iconSize"
+          name="add-circle"
+          color="primary"
+          (click)="increaseQuantity(item.produto)"
+        ></ion-icon>
+      </ion-label>
+      <ion-icon
+        name="trash"
+        slot="end"
+        color="danger"
+        (click)="removeItem(item.produto)"
+      ></ion-icon>
+    </ion-item>
+    
+    <ion-item *ngIf="total() > 0">
+      <h1>Total</h1>
+      <h1 slot="end">{{ total() | currency }}</h1>
+    </ion-item>
+    <div *ngIf="total() <= 0">
+      <h2 class="ion-text-center">Seu carrinho está vazio</h2>
+    </div>
+  </ion-list>
+  <ion-button expand="block" (click)="goOn()"
+    >Continuar comprando...</ion-button
+  >
+  <ion-button *ngIf="total() > 0" expand="block" color="success" (click)="checkout()"
+  >Finalizar pedido</ion-button
+>
+</ion-content>

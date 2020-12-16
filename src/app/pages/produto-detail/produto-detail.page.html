@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Detalhes de Produto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/cart" routerDirection="root">
+      <ion-icon name="cart"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-card>
+    <div align="center">
+      <img [src]="item?.imageUrl || 'assets/imgs/prod.jpg'">
+    </div>
+    <ion-card-content>
+      <ion-card-title>
+        {{item?.nome}}
+      </ion-card-title>
+      <ion-card-subtitle>
+        {{ item?.preco | currency }}
+      </ion-card-subtitle>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" fill="outline" (click)="addToCart(item)">Adicionar ao carrinho</ion-button>
+</ion-content>

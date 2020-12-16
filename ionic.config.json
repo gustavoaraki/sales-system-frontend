@@ -1,0 +1,7 @@
+{
+  "name": "araki-salesystem-ionic",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Fechamento de Pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+      <ion-list-header>
+        <ion-label>
+          Selecione um endereço :
+        </ion-label>
+      </ion-list-header>
+      <ion-item button *ngFor="let item of items" (click)="nextPage(item)">
+        <ion-label>
+            <h2>{{ item.logradouro }}, {{ item.numero }}</h2>
+            <p>{{ item.complemento }} {{ item.bairro }} CEP {{ item.cep }}</p>
+            <p>{{ item.cidade.nome }}, {{ item.cidade.estado.nome }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+</ion-content>

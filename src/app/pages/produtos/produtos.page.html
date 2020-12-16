@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Produtos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/cart" routerDirection="root">
+      <ion-icon name="cart"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-list>
+    <ion-item button *ngFor="let item of items" (click)="showDetail(item.id)">
+      <ion-thumbnail slot="start">
+        <img [src]="item.imageUrl || 'assets/imgs/prod.jpg'" >
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{item.nome}}</h2>
+        <p>{{item.preco | currency}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Carregando mais produtos...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

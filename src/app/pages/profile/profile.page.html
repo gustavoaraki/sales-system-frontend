@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div align="center">
+    <ion-thumbnail>
+      <img class="circle" [src]="cliente?.imageUrl || '/assets/imgs/avatar-blank.png'">
+    </ion-thumbnail>
+  </div>
+  <h2 class="ion-text-center">{{ cliente?.nome }}</h2>
+  <p class="ion-text-center">{{ cliente?.userName }}</p>
+
+  <ion-card>
+    <ion-card-header>
+      Enviar imagem de perfil
+    </ion-card-header>
+    <ion-item *ngIf="picture" align="center">
+      <img [src]="picture">
+    </ion-item>
+    <ion-button expand="block" (click)="getCameraPicture()" [disabled]="cameraOn">Camera</ion-button>
+    <ion-button expand="block" (click)="getGalleryPicture()" [disabled]="cameraOn">Galeria</ion-button>
+    <ion-button *ngIf="picture" expand="block" fill="outline" (click)="sendPicture()">Enviar imagem</ion-button>
+    <ion-button *ngIf="picture" expand="block" fill="outline" (click)="cancel()">Descartar imagem</ion-button>
+  </ion-card>
+</ion-content>
